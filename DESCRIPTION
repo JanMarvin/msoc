@@ -1,0 +1,25 @@
+Type: Package
+Package: msoc
+Title: Encrypt and Decrypt of office open xml files
+Version: 0.1
+Language: en-US
+Authors@R: c(
+  person("Jan Marvin", "Garbuszus", email = "jan.garbuszus@ruhr-uni-bochum.de", role = c("aut", "cre")),
+  person("Shigeo", "Mitsunari", role = c("cph"), comment = "Author of included msoc library")
+  )
+Description: Provide encryption and decryption functions for the Office Open XML file format.
+License: BSD_3_clause + file LICENSE
+URL: https://janmarvin.github.io/msoc/, https://github.com/JanMarvin/msoc
+BugReports: https://github.com/JanMarvin/msoc/issues
+Depends:
+    R (>= 3.5.0)
+Imports:
+    Rcpp,
+LinkingTo:
+    Rcpp
+Suggests:
+    testthat
+Encoding: UTF-8
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
+SystemRequirements: OpenSSL >= 1.0.1

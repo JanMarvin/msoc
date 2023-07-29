@@ -1,0 +1,16 @@
+url: https://janmarvin.github.io/msoc
+
+destination: docs
+
+template:
+  bootstrap: 5
+
+development:
+  mode: auto
+
+reference:
+- title: Main
+  contents:
+  - encrypt
+  - decrypt
+  - msoc-package

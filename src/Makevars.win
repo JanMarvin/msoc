@@ -1,0 +1,22 @@
+VERSION=1.1.1k
+PKG_CPPFLAGS= -I../windows/openssl-$(VERSION)/include -I. -Icryptography -Icryptography/msoc/include
+PKG_LIBS = -Lcryptography -lmsoc -L../windows/openssl-$(VERSION)/lib${R_ARCH}${CRT} -lssl -lcrypto -lws2_32 -lcrypt32
+
+LIBMSOC = cryptography/msoc/msocdll.o
+
+STATLIB = cryptography/libmsoc.a
+
+all: clean winlibs
+
+all: $(SHLIB)
+$(SHLIB): $(STATLIB)
+
+$(STATLIB): $(LIBMSOC)
+
+clean:
+	rm -f $(OBJECTS) $(SHLIB) $(STATLIB) $(LIBMSOC)
+
+winlibs:
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
+
+.PHONY: all clean
