@@ -16,3 +16,20 @@ test_that("encrypt/decrypt", {
   }
 
 })
+
+test_that("decrypt/encrypt", {
+
+  files <- c(
+    system.file("extdata", "Encrypted.docx", package = "msoc"),
+    system.file("extdata", "Encrypted.xlsx", package = "msoc"),
+    system.file("extdata", "Encrypted.pptx", package = "msoc")
+  )
+
+  for (file in files) {
+
+    expect_error(out <- decrypt(file, pass = "test"), "bad password")
+    expect_silent(out <- decrypt(file, pass = "msoc"))
+
+  }
+
+})
