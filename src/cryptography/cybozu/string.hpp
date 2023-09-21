@@ -1709,13 +1709,15 @@ void save(OutputStream& os, const cybozu::String& str)
 // specialization for boost::hash
 namespace boost {
 
-template <>
+template<>
 struct hash<cybozu::String> {
-    size_t operator()(const cybozu::String& str) const {
-        return static_cast<size_t>(cybozu::hash64(str.c_str(), str.size()));
-    }
+	typedef cybozu::String argument_type;
+	typedef size_t result_type;
+	size_t operator()(const cybozu::String& str) const
+	{
+		return static_cast<size_t>(cybozu::hash64(str.c_str(), str.size()));
+	}
 };
-
 
 } // boost
 
@@ -1727,13 +1729,15 @@ namespace std {
 CYBOZU_NAMESPACE_TR1_BEGIN
 #endif
 
-template <>
+template<>
 struct hash<cybozu::String> {
-    size_t operator()(const cybozu::String& str) const {
-        return static_cast<size_t>(cybozu::hash64(str.c_str(), str.size()));
-    }
+	typedef cybozu::String argument_type;
+	typedef size_t result_type;
+	size_t operator()(const cybozu::String& str) const
+	{
+		return static_cast<size_t>(cybozu::hash64(str.c_str(), str.size()));
+	}
 };
-
 
 #if defined(_MSC_VER) && (_MSC_VER == 1600)
 	// defined in std ?
