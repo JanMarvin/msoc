@@ -371,5 +371,5 @@ public:
 } }	// cybozu::crypto
 
 #ifdef __APPLE__
-	#pragma GCC diagnostic pop
+	// #pragma GCC diagnostic pop
 #endif
