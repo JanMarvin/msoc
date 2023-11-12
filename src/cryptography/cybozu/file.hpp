@@ -241,7 +241,7 @@ public:
 		} else {
 			if (::fdatasync(hdl_)) goto ERR_EXIT;
 		}
-#else
+#elif defined(__APPLE__)
 		if (::fcntl(hdl_, F_FULLFSYNC)) goto ERR_EXIT;
 #endif
 		return;
