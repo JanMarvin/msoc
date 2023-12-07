@@ -51,6 +51,9 @@ to maintain the bundled msoc library. Assume that I only made it work and if it
 ever breaks, you are on your own. Due to these reasons the package will never
 be released to CRAN either.
 
+Before you encrypt a file, you should memorize the password. If you forget the 
+password, there is no way to recover the contents of the file.
+
 ```{r}
 library(msoc)
 file <- system.file("extdata", "Untitled1.xlsx", package = "msoc")
