@@ -71,16 +71,15 @@ wb_workbook()$add_worksheet()$add_data(x = mtcars)$save(xlsx)
 
 # now we can encrypt it
 encrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"
 
 # the file is encrypted, we can not read it
 try(wb <- wb_load(xlsx))
-#> Warning in unzip(file, exdir = xmlDir): error 1 in extracting from zip file
-#> Error in wb_load(xlsx) : object 'sheets' not found
+#> Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx
 
 # we have to decrypt it first
 decrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"
 
 # now we can load it again
 wb_load(xlsx)$to_df() %>% head()

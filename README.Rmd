@@ -69,7 +69,7 @@ out <- decrypt(out, pass = "msoc")
 
 ## An example with [`openxlsx2`](https://github.com/JanMarvin/openxlsx2)
 
-``` r
+```{r}
 library(openxlsx2)
 library(msoc)
 
@@ -80,26 +80,15 @@ wb_workbook()$add_worksheet()$add_data(x = mtcars)$save(xlsx)
 
 # now we can encrypt it
 encrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"
 
 # the file is encrypted, we can not read it
 try(wb <- wb_load(xlsx))
-#> Warning in unzip(file, exdir = xmlDir): error 1 in extracting from zip file
-#> Error in wb_load(xlsx) : object 'sheets' not found
 
 # we have to decrypt it first
 decrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"
 
 # now we can load it again
 wb_load(xlsx)$to_df() %>% head()
-#>    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#> 2 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-#> 3 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-#> 4 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-#> 5 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-#> 6 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#> 7 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 ## License
