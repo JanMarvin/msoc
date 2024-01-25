@@ -111,16 +111,15 @@
 <span></span>
 <span><span class="co"># now we can encrypt it</span></span>
 <span><span class="fu"><a href="reference/msoc.html">encrypt</a></span><span class="op">(</span><span class="va">xlsx</span>, <span class="va">xlsx</span>, pass <span class="op">=</span> <span class="st">"msoc"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"</span></span>
 <span></span>
 <span><span class="co"># the file is encrypted, we can not read it</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">wb_load</span><span class="op">(</span><span class="va">xlsx</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in unzip(file, exdir = xmlDir): error 1 in extracting from zip file</span></span>
-<span><span class="co">#&gt; Error in wb_load(xlsx) : object 'sheets' not found</span></span>
+<span><span class="co">#&gt; Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx</span></span>
 <span></span>
 <span><span class="co"># we have to decrypt it first</span></span>
 <span><span class="fu"><a href="reference/msoc.html">decrypt</a></span><span class="op">(</span><span class="va">xlsx</span>, <span class="va">xlsx</span>, pass <span class="op">=</span> <span class="st">"msoc"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpUqVrjd/temp_xlsx_a36178fd886b.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"</span></span>
 <span></span>
 <span><span class="co"># now we can load it again</span></span>
 <span><span class="fu">wb_load</span><span class="op">(</span><span class="va">xlsx</span><span class="op">)</span><span class="op">$</span><span class="fu">to_df</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
