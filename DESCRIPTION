@@ -22,4 +22,4 @@ Suggests:
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
-SystemRequirements: OpenSSL >= 1.0.1
+SystemRequirements: OpenSSL >= 1.0.2
