@@ -46,6 +46,24 @@ msoc <- function(mode, in_file, out_file, pass) {
   output
 }
 
+# Function to check for problematic characters in the password
+check_password <- function(password) {
+  # Define regex patterns with Unicode escape sequences
+  accented_pattern    <- "[\u00C0-\u00FF]"
+  japanese_pattern    <- "[\u3041-\u3093\u30A1-\u30F3\u4E00-\u9FAF]"
+  punctuation_pattern <- "[[{}();:,.!?\'\"`~@#$%^&*]"
+
+  # Check for the presence of problematic characters
+  has_accented    <- grepl(accented_pattern, password)
+  has_japanese    <- grepl(japanese_pattern, password)
+  has_punctuation <- grepl(punctuation_pattern, password)
+
+  # Return results
+  if (any(has_accented, has_japanese, has_punctuation))
+    stop("password contains accented or japanese characters or uses punctuation")
+
+}
+
 #' Encryption/Decryption function
 #' @name msoc
 #' @param input input file
@@ -60,6 +78,8 @@ NULL
 #' @rdname msoc
 #' @export
 encrypt <- function(input, output = NULL, pass) {
+
+  check_password(pass)
 
   out <- .msoc("enc", input = input, output = output, pass = pass)
 

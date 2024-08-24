@@ -33,3 +33,13 @@ test_that("decrypt/encrypt", {
   }
 
 })
+
+test_that("password should be ascii", {
+
+  xlsx <- tempfile(fileext = ".xlsx")
+
+  expect_error(encrypt(xlsx, xlsx, pass = "鬼"), "password contains accented or japanese characters or uses punctuation")
+  expect_error(encrypt(xlsx, xlsx, pass = "brûlée"), "password contains accented or japanese characters or uses punctuation")
+  expect_error(encrypt(xlsx, xlsx, pass = "msoc!"), "password contains accented or japanese characters or uses punctuation")
+
+})
