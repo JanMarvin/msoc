@@ -4,6 +4,10 @@
 #include <Rinternals.h>
 #include <R_ext/Error.h>
 
+#ifdef error
+#undef error
+#endif
+
 #include <string>
 #include "msoc.h"
 
