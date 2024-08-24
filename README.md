@@ -71,15 +71,15 @@ wb_workbook()$add_worksheet()$add_data(x = mtcars)$save(xlsx)
 
 # now we can encrypt it
 encrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"
 
 # the file is encrypted, we can not read it
 try(wb <- wb_load(xlsx))
-#> Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx
+#> Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx
 
 # we have to decrypt it first
 decrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmptBmmuM/temp_xlsx_163f4750b0c6f.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"
 
 # now we can load it again
 wb_load(xlsx)$to_df() %>% head()

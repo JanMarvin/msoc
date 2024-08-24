@@ -13,3 +13,21 @@ The password is expected to be plain text. If security is of importance,
 do not use this package. If the password is lost, opening the file will
 be impossible.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://janmarvin.github.io/msoc/}
+  \item \url{https://github.com/JanMarvin/msoc}
+  \item Report bugs at \url{https://github.com/JanMarvin/msoc/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de}
+
+Other contributors:
+\itemize{
+  \item Shigeo Mitsunari (Author of included msoc library) [copyright holder]
+}
+
+}

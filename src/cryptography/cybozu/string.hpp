@@ -12,7 +12,29 @@
 	#pragma warning(disable : 4702)
 #endif
 
-#include <Rcpp/Lightest>
+#include <R.h>
+#include <R_ext/Error.h>
+
+// Undefine problematic macros
+#ifdef Realloc
+#undef Realloc
+#endif
+
+#ifdef Free
+#undef Free
+#endif
+
+#ifdef error
+#undef error
+#endif
+
+#ifdef length
+#undef length
+#endif
+
+#ifdef interface
+#undef interface
+#endif
 
 #include <string>
 #include <cstring>
