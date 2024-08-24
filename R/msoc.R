@@ -1,3 +1,12 @@
+#' @useDynLib msoc R_msoc
+msoc <- function(mode, in_file, out_file, pass) {
+  stopifnot(is.character(mode))
+  stopifnot(is.character(in_file))
+  stopifnot(is.character(out_file))
+  stopifnot(is.character(pass))
+  .Call(R_msoc, mode, in_file, out_file, pass)
+}
+
 #' msoc
 #'
 #' @description
@@ -10,12 +19,9 @@
 #' be impossible.
 #'
 #' @name msoc-package
-#' @docType package
-#' @useDynLib msoc, .registration=TRUE
 #'
-#' @import Rcpp
 #' @importFrom tools file_ext
-NULL
+"_PACKAGE"
 
 #' msoc driver function
 #' @param type type
@@ -31,7 +37,10 @@ NULL
     output <- tempfile(fileext = paste0(".", ext))
   }
 
-  out <- msoc(type, inFile = input, outFile = output, pass = pass)
+  if (!all(type %in% c("dec", "enc")))
+    stop("Input must be enc/dec. Was: ", type)
+
+  out <- msoc(type, in_file = input, out_file = output, pass = pass)
   stopifnot(out == 0)
 
   output
