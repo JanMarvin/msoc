@@ -43,7 +43,9 @@ reasons the package will never be released to CRAN either.
 
 Before you encrypt a file, you should memorize the password. If you
 forget the password, there is no way to recover the contents of the
-file.
+file. Password encoding was not extensively tested. Before encrypting
+with non ASCII characters, it is recommended to check that files encoded
+this way, can be opened in spreadsheet software.
 
 ``` r
 library(msoc)
@@ -71,15 +73,15 @@ wb_workbook()$add_worksheet()$add_data(x = mtcars)$save(xlsx)
 
 # now we can encrypt it
 encrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx"
 
 # the file is encrypted, we can not read it
 try(wb <- wb_load(xlsx))
-#> Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx
+#> Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx
 
 # we have to decrypt it first
 decrypt(xlsx, xlsx, pass = "msoc")
-#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"
+#> [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx"
 
 # now we can load it again
 wb_load(xlsx)$to_df() %>% head()

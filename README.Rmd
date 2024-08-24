@@ -52,7 +52,10 @@ ever breaks, you are on your own. Due to these reasons the package will never
 be released to CRAN either.
 
 Before you encrypt a file, you should memorize the password. If you forget the 
-password, there is no way to recover the contents of the file.
+password, there is no way to recover the contents of the file. Password encoding
+was not extensively tested. Before encrypting with non ASCII characters, it is
+recommended to check that files encoded this way, can be opened in spreadsheet
+software.
 
 ```{r}
 library(msoc)
