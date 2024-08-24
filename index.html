@@ -71,7 +71,7 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>A word of warning. I have no background in cryptography and I am somewhat unable to maintain the bundled msoc library. Assume that I only made it work and if it ever breaks, you are on your own. Due to these reasons the package will never be released to CRAN either.</p>
-<p>Before you encrypt a file, you should memorize the password. If you forget the password, there is no way to recover the contents of the file.</p>
+<p>Before you encrypt a file, you should memorize the password. If you forget the password, there is no way to recover the contents of the file. Password encoding was not extensively tested. Before encrypting with non ASCII characters, it is recommended to check that files encoded this way, can be opened in spreadsheet software.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://janmarvin.github.io/msoc/">msoc</a></span><span class="op">)</span></span>
 <span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Untitled1.xlsx"</span>, package <span class="op">=</span> <span class="st">"msoc"</span><span class="op">)</span></span>
@@ -99,15 +99,15 @@
 <span></span>
 <span><span class="co"># now we can encrypt it</span></span>
 <span><span class="fu"><a href="reference/msoc.html">encrypt</a></span><span class="op">(</span><span class="va">xlsx</span>, <span class="va">xlsx</span>, pass <span class="op">=</span> <span class="st">"msoc"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx"</span></span>
 <span></span>
 <span><span class="co"># the file is encrypted, we can not read it</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu">wb_load</span><span class="op">(</span><span class="va">xlsx</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx</span></span>
+<span><span class="co">#&gt; Error : Unable to open and load file:  /var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx</span></span>
 <span></span>
 <span><span class="co"># we have to decrypt it first</span></span>
 <span><span class="fu"><a href="reference/msoc.html">decrypt</a></span><span class="op">(</span><span class="va">xlsx</span>, <span class="va">xlsx</span>, pass <span class="op">=</span> <span class="st">"msoc"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpZBfuXX/temp_xlsx_17a73519628b8.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/var/folders/p7/t9znbbgj2_ndlz6vbxmgh7zm0000gn/T//RtmpfkrWpI/temp_xlsx_181864316774a.xlsx"</span></span>
 <span></span>
 <span><span class="co"># now we can load it again</span></span>
 <span><span class="fu">wb_load</span><span class="op">(</span><span class="va">xlsx</span><span class="op">)</span><span class="op">$</span><span class="fu">to_df</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
