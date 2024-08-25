@@ -1,11 +1,12 @@
 #' @useDynLib msoc R_msoc
-msoc <- function(mode, in_file, out_file, pass) {
+msoc <- function(mode, in_file, out_file, pass, aes256) {
   stopifnot(is.character(mode))
   stopifnot(is.character(in_file))
   stopifnot(is.character(out_file))
   stopifnot(is.character(pass))
-  pass <- enc2utf8(pass);
-  .Call(R_msoc, mode, in_file, out_file, pass)
+  pass <- enc2utf8(pass)
+  stopifnot(is.logical(aes256))
+  .Call(R_msoc, mode, in_file, out_file, pass, aes256)
 }
 
 #' msoc
@@ -29,9 +30,10 @@ msoc <- function(mode, in_file, out_file, pass) {
 #' @param input input
 #' @param output output
 #' @param pass pass
+#' @param aes256 aes256
 #' @keywords internal
 #' @noRd
-.msoc <- function(type = c("dec", "enc"), input, output, pass) {
+.msoc <- function(type = c("dec", "enc"), input, output, pass, aes256 = FALSE) {
 
   input <- path.expand(input)
   if (!file.exists(input)) stop("File does not exist")
@@ -46,7 +48,7 @@ msoc <- function(mode, in_file, out_file, pass) {
   if (!all(type %in% c("dec", "enc")))
     stop("Input must be enc/dec. Was: ", type)
 
-  out <- msoc(type, in_file = input, out_file = output, pass = pass)
+  out <- msoc(type, in_file = input, out_file = output, pass = pass, aes256 = aes256)
   stopifnot(out == 0)
 
   output
@@ -80,16 +82,17 @@ check_password <- function(password) {
 #' @param pass a password to decrypt/encrypt the input file. The password is
 #' expected to be plain text. If security is of importance, do not use this
 #' package. If the password is lost, opening the file will be impossible.
+#' @param aes256 use AES256 for encryption, the default is AES128.
 #' @returns a path to the output file. Either specified or temporary
 NULL
 
 #' @rdname msoc
 #' @export
-encrypt <- function(input, output = NULL, pass) {
+encrypt <- function(input, output = NULL, pass, aes256 = FALSE) {
 
   check_password(pass)
 
-  out <- .msoc("enc", input = input, output = output, pass = pass)
+  out <- .msoc("enc", input = input, output = output, pass = pass, aes256 = aes256)
 
   out
 }

@@ -1,11 +1,2 @@
 PKG_CPPFLAGS = @cflags@ -I. -Icryptography -Icryptography/msoc/include
 PKG_LIBS = -Lcryptography @libs@
-
-# PKG_CXXFLAGS= -Wall -pedantic
-all: clean
-
-all: $(SHLIB)
-$(SHLIB): $(STATLIB)
-
-clean:
-	rm -f $(OBJECTS) $(SHLIB) $(STATLIB)

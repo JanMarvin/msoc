@@ -6,7 +6,7 @@
 \alias{decrypt}
 \title{Encryption/Decryption function}
 \usage{
-encrypt(input, output = NULL, pass)
+encrypt(input, output = NULL, pass, aes256 = FALSE)
 
 decrypt(input, output = NULL, pass)
 }
@@ -19,6 +19,8 @@ temporary output file with the file extension of the input file}
 \item{pass}{a password to decrypt/encrypt the input file. The password is
 expected to be plain text. If security is of importance, do not use this
 package. If the password is lost, opening the file will be impossible.}
+
+\item{aes256}{use AES256 for encryption, the default is AES128.}
 }
 \value{
 a path to the output file. Either specified or temporary

@@ -1,7 +1,7 @@
 Type: Package
 Package: msoc
 Title: Encrypt and Decrypt of office open xml files
-Version: 0.1.4
+Version: 0.2
 Language: en-US
 Authors@R: c(
   person("Jan Marvin", "Garbuszus", email = "jan.garbuszus@ruhr-uni-bochum.de", role = c("aut", "cre")),
@@ -14,6 +14,7 @@ BugReports: https://github.com/JanMarvin/msoc/issues
 Depends:
     R (>= 3.5.0)
 Suggests:
+    stringi,
     testthat
 Encoding: UTF-8
 RoxygenNote: 7.3.2
