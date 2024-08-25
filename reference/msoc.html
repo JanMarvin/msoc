@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">msoc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">encrypt</span><span class="op">(</span><span class="va">input</span>, output <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">pass</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">encrypt</span><span class="op">(</span><span class="va">input</span>, output <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">pass</span>, aes256 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">decrypt</span><span class="op">(</span><span class="va">input</span>, output <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">pass</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -60,6 +60,10 @@ temporary output file with the file extension of the input file</p></dd>
 <dd><p>a password to decrypt/encrypt the input file. The password is
 expected to be plain text. If security is of importance, do not use this
 package. If the password is lost, opening the file will be impossible.</p></dd>
+
+
+<dt id="arg-aes-">aes256<a class="anchor" aria-label="anchor" href="#arg-aes-"></a></dt>
+<dd><p>use AES256 for encryption, the default is AES128.</p></dd>
 
 </dl></div>
     <div class="section level2">
