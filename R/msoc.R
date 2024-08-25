@@ -4,9 +4,8 @@ msoc <- function(mode, in_file, out_file, pass, aes256) {
   stopifnot(is.character(in_file))
   stopifnot(is.character(out_file))
   stopifnot(is.character(pass))
-  pass <- enc2utf8(pass)
   stopifnot(is.logical(aes256))
-  .Call(R_msoc, mode, in_file, out_file, pass, aes256)
+  .Call(R_msoc, mode, enc2utf8(in_file), enc2utf8(out_file), enc2utf8(pass), aes256)
 }
 
 #' msoc
