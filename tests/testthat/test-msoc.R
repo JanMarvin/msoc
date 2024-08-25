@@ -36,10 +36,22 @@ test_that("decrypt/encrypt", {
 
 test_that("password should be ascii", {
 
+  xlsx <- system.file("extdata", "Untitled1.xlsx", package = "msoc")
+
+  expect_warning(got1 <- encrypt(xlsx, pass = "鬼"), "Password contains non ASCII characters or uses punctuation")
+  expect_warning(got2 <- encrypt(xlsx, pass = "brûlée"), "Password contains non ASCII characters or uses punctuation")
+  expect_warning(got3 <- encrypt(xlsx, pass = "msoc!"), "Password contains non ASCII characters or uses punctuation")
+
+  decrypt(got1, pass = "鬼")
+  decrypt(got2, pass = "brûlée")
+  decrypt(got3, pass = "msoc!")
+
+})
+
+test_that("errors work", {
+
   xlsx <- tempfile(fileext = ".xlsx")
 
-  expect_error(encrypt(xlsx, xlsx, pass = "鬼"), "password contains accented or japanese characters or uses punctuation")
-  expect_error(encrypt(xlsx, xlsx, pass = "brûlée"), "password contains accented or japanese characters or uses punctuation")
-  expect_error(encrypt(xlsx, xlsx, pass = "msoc!"), "password contains accented or japanese characters or uses punctuation")
+  expect_error(encrypt(xlsx, pass = "foo"), "File does not exist")
 
 })

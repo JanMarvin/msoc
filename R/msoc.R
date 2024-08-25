@@ -4,6 +4,7 @@ msoc <- function(mode, in_file, out_file, pass) {
   stopifnot(is.character(in_file))
   stopifnot(is.character(out_file))
   stopifnot(is.character(pass))
+  pass <- enc2utf8(pass);
   .Call(R_msoc, mode, in_file, out_file, pass)
 }
 
@@ -32,9 +33,14 @@ msoc <- function(mode, in_file, out_file, pass) {
 #' @noRd
 .msoc <- function(type = c("dec", "enc"), input, output, pass) {
 
+  input <- path.expand(input)
+  if (!file.exists(input)) stop("File does not exist")
+
   if (is.null(output)) {
     ext <- tools::file_ext(input)
     output <- tempfile(fileext = paste0(".", ext))
+  } else {
+    output <- path.expand(output)
   }
 
   if (!all(type %in% c("dec", "enc")))
@@ -60,7 +66,9 @@ check_password <- function(password) {
 
   # Return results
   if (any(has_accented, has_japanese, has_punctuation))
-    stop("password contains accented or japanese characters or uses punctuation")
+    warning("Password contains non ASCII characters or uses punctuation:\n",
+            "files encrypted with this, require modern spreadsheet software.\n",
+            "It is advised to use ASCII characters")
 
 }
 
