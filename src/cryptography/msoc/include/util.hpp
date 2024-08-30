@@ -48,7 +48,9 @@ inline void dprintf(const char *format, ...)
 	/*#pragma GCC diagnostic push*/
 	/*#pragma GCC diagnostic ignored "-Wformat-nonliteral"*/
 #endif
-	vprintf(format, args);
+	char buffer[4096];
+	vsnprintf(buffer, sizeof(buffer), format, args); // Format the string
+	Rprintf(format, args);
 #ifdef __GNUC__
 	/*#pragma GCC diagnostic pop*/
 #endif

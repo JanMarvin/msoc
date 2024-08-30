@@ -26,3 +26,7 @@ cran-comments.md
 ^configure.log$
 ^windows$
 ^src/Makevars$
+.*\.so
+.*\.dll
+.*\.o
+.*\.a
