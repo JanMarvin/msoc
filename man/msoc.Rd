@@ -4,11 +4,14 @@
 \alias{msoc}
 \alias{encrypt}
 \alias{decrypt}
+\alias{msoc_hash}
 \title{Encryption/Decryption function}
 \usage{
 encrypt(input, output = NULL, pass, aes256 = FALSE)
 
 decrypt(input, output = NULL, pass)
+
+msoc_hash(pass)
 }
 \arguments{
 \item{input}{input file}

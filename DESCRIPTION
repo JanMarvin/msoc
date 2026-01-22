@@ -14,6 +14,7 @@ BugReports: https://github.com/JanMarvin/msoc/issues
 Depends:
     R (>= 3.5.0)
 Suggests:
+    openssl,
     stringi,
     testthat
 Encoding: UTF-8

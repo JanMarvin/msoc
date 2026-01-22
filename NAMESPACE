@@ -2,5 +2,6 @@
 
 export(decrypt)
 export(encrypt)
+export(msoc_hash)
 importFrom(tools,file_ext)
 useDynLib(msoc,R_msoc)

@@ -3,9 +3,11 @@
 #include <R_ext/Rdynload.h>
 
 SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP sexp_pass, SEXP sexp_aes256);
+SEXP R_msoc_hash_password(SEXP sexp_pass, SEXP sexp_spin);
 
 static const R_CallMethodDef CallEntries[] = {
-  {"R_msoc", (DL_FUNC) &R_msoc, 5},
+  {"R_msoc",               (DL_FUNC) &R_msoc,               5},
+  {"R_msoc_hash_password", (DL_FUNC) &R_msoc_hash_password, 2},
   {NULL, NULL, 0}
 };
 

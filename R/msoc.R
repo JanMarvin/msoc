@@ -104,3 +104,9 @@ decrypt <- function(input, output = NULL, pass) {
 
   out
 }
+
+#' @rdname msoc
+#' @export
+msoc_hash <- function(pass) {
+  .Call("R_msoc_hash_password", enc2utf8(pass), 100000L, PACKAGE = "msoc")
+}
