@@ -1594,6 +1594,7 @@ inline std::ostream& operator<<(std::ostream& os, const String& str)
 	return os << str.toUtf8();
 }
 
+#if __cplusplus < 202002L
 inline bool operator==(const cybozu::Char* lhs, const String& rhs) { return rhs == lhs; }
 inline bool operator!=(const cybozu::Char* lhs, const String& rhs) { return rhs != lhs; }
 inline bool operator<=(const cybozu::Char* lhs, const String& rhs) { return rhs >= lhs; }
@@ -1628,6 +1629,7 @@ inline bool operator<=(const std::wstring& lhs, const String& rhs) { return rhs 
 inline bool operator>=(const std::wstring& lhs, const String& rhs) { return rhs <= lhs; }
 inline bool operator<(const std::wstring& lhs, const String& rhs) { return rhs > lhs; }
 inline bool operator>(const std::wstring& lhs, const String& rhs) { return rhs < lhs; }
+#endif
 #endif
 
 inline void swap(String& lhs, String& rhs) { lhs.swap(rhs); }

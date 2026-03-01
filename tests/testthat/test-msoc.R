@@ -85,3 +85,32 @@ test_that("encrypt/decrypt with aes256", {
   }
 
 })
+
+test_that("hasher works", {
+
+  skip_if_not_installed("openssl")
+
+  verifyPasswordSHA512 <- function(attempted_password, stored_hash, stored_salt, stored_spin) {
+
+    salt_raw <- openssl::base64_decode(stored_salt)
+
+    password_utf16le_raw <- iconv(enc2utf8(attempted_password), to = "UTF-16LE", toRaw = TRUE)[[1]]
+
+    hashed_attempt <- as.raw(openssl::sha512(c(salt_raw, password_utf16le_raw)))
+
+    for (i in 0:(stored_spin - 1)) {
+      index_bytes <- writeBin(as.integer(i), raw(), size = 4, endian = "little")
+      hashed_attempt <- as.raw(openssl::sha512(c(hashed_attempt, index_bytes)))
+    }
+
+    final_attempt_hash <- openssl::base64_encode(hashed_attempt)
+
+    identical(final_attempt_hash, stored_hash)
+  }
+
+  hp <- msoc_hash("openxlsx2")
+
+  expect_true(verifyPasswordSHA512("openxlsx2", stored_hash = hp$hash, stored_salt = hp$salt, stored_spin = hp$spin))
+  expect_false(verifyPasswordSHA512("openxlsx", stored_hash = hp$hash, stored_salt = hp$salt, stored_spin = hp$spin))
+
+})

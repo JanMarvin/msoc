@@ -108,3 +108,54 @@ extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP
   }
   return Rf_ScalarInteger(0);
 }
+
+extern "C" SEXP R_msoc_hash_password(SEXP sexp_pass, SEXP sexp_spin) {
+  std::string pass = to_string(sexp_pass);
+  int spinCount = Rf_asInteger(sexp_spin);
+
+  cybozu::RandomGenerator rg;
+  uint8_t salt_bytes[16];
+  rg.read(salt_bytes, 16);
+  std::string salt(reinterpret_cast<char*>(salt_bytes), 16);
+
+  cybozu::String16 wpass = cybozu::ToUtf16(pass);
+  std::string pwd_raw(reinterpret_cast<const char*>(wpass.c_str()), wpass.size() * 2);
+
+  cybozu::crypto::Hash s(cybozu::crypto::Hash::N_SHA512);
+  // Initial: SHA512(salt + password)
+  std::string h = s.digest(salt + pwd_raw);
+
+  for (int i = 0; i < spinCount; i++) {
+    char iter[4];
+    cybozu::Set32bitAsLE(iter, i);
+
+    s.update(h.data(), h.size());
+
+    // digest(out, in, len) performs: update(in, len) -> final(out) -> reset()
+    s.digest(&h[0], iter, sizeof(iter));
+  }
+
+  auto to_b64 = [](const std::string& data) -> std::string {
+    std::string result;
+    cybozu::StringOutputStream os(result);
+    cybozu::MemoryInputStream is(data.data(), data.size());
+    cybozu::EncodeToBase64(os, is, 0, cybozu::base64::noEndLine);
+    return result;
+  };
+
+  SEXP res = PROTECT(Rf_allocVector(VECSXP, 4));
+  SET_VECTOR_ELT(res, 0, Rf_mkString(to_b64(h).c_str()));
+  SET_VECTOR_ELT(res, 1, Rf_mkString(to_b64(salt).c_str()));
+  SET_VECTOR_ELT(res, 2, Rf_ScalarInteger(spinCount));
+  SET_VECTOR_ELT(res, 3, Rf_mkString("SHA-512"));
+
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 4));
+  SET_STRING_ELT(names, 0, Rf_mkChar("hash"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("salt"));
+  SET_STRING_ELT(names, 2, Rf_mkChar("spin"));
+  SET_STRING_ELT(names, 3, Rf_mkChar("algo"));
+  Rf_setAttrib(res, R_NamesSymbol, names);
+
+  UNPROTECT(2);
+  return res;
+}
