@@ -169,6 +169,18 @@ public:
 		return operator<<(cybozu::exception::wstr2str(s));
 	}
 #endif
+	Exception& operator<<(char16_t x)
+	{
+		std::ostringstream os;
+		os << static_cast<unsigned int>(x);
+		return operator<<(os.str());
+	}
+	Exception& operator<<(char32_t x)
+	{
+		std::ostringstream os;
+		os << static_cast<unsigned int>(x);
+		return operator<<(os.str());
+	}
 	template<class T>
 	Exception& operator<<(const T& x)
 	{
