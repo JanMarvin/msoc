@@ -92,7 +92,7 @@ decrypt(xlsx, xlsx, pass = "msoc")
 #> [1] "/tmp/Rtmp42ze8T/temp_xlsx_10b53360658e2.xlsx"
 
 # now we can load it again
-wb_load(xlsx)$to_df() %>% head()
+wb_load(xlsx)$to_df() |> head()
 #>    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 #> 2 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 #> 3 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
