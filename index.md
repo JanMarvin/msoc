@@ -10,6 +10,7 @@ You can install the development version of `msoc` from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("JanMarvin/msoc")
 ```
@@ -17,6 +18,7 @@ remotes::install_github("JanMarvin/msoc")
 Or from [r-universe](https://r-universe.dev/) with:
 
 ``` r
+
 # Enable repository from janmarvin
 options(repos = c(
   janmarvin = 'https://janmarvin.r-universe.dev',
@@ -47,6 +49,7 @@ opened in spreadsheet software and otherwise fall back to a pure ASCII
 password.
 
 ``` r
+
 library(msoc)
 file <- system.file("extdata", "Untitled1.xlsx", package = "msoc")
 
@@ -62,6 +65,7 @@ out <- decrypt(out, pass = "msoc")
 ## An example with [`openxlsx2`](https://github.com/JanMarvin/openxlsx2)
 
 ``` r
+
 library(openxlsx2)
 library(msoc)
 
