@@ -25,6 +25,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de}
 
+Authors:
+\itemize{
+  \item Jan Marvin Garbuszus \email{jan.garbuszus@ruhr-uni-bochum.de}
+}
+
 Other contributors:
 \itemize{
   \item Shigeo Mitsunari (Author of included msoc library) [copyright holder]
