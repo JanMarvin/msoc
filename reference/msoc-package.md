@@ -24,6 +24,10 @@ Useful links:
 
 **Maintainer**: Jan Marvin Garbuszus <jan.garbuszus@ruhr-uni-bochum.de>
 
+Authors:
+
+- Jan Marvin Garbuszus <jan.garbuszus@ruhr-uni-bochum.de>
+
 Other contributors:
 
 - Shigeo Mitsunari (Author of included msoc library) \[copyright
