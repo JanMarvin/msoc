@@ -280,11 +280,11 @@ struct EncryptionInfo {
 			seVerifier.put();
 		} else {
 			Rprintf("spinCount = %d\n", spinCount);
-			Rprintf("keyData");
+			Rprintf("keyData\n");
 			keyData.put();
 			Rprintf("encryptedHmacKey = "); dump(encryptedHmacKey, false);
 			Rprintf("encryptedHmacValue = "); dump(encryptedHmacValue, false);
-			Rprintf("encryptedKey");
+			Rprintf("encryptedKey\n");
 			encryptedKey.put();
 			Rprintf("encryptedVerifierHashInput = "); dump(encryptedVerifierHashInput, false);
 			Rprintf("encryptedVerifierHashValue = "); dump(encryptedVerifierHashValue, false);

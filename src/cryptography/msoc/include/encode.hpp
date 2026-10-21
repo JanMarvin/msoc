@@ -150,7 +150,7 @@ inline bool encode_in(
 	std::string& iv = encryptedKey.saltValue;
 	FillRand(iv, encryptedKey.saltSize);
 #ifdef SAME_KEY
-	Rprintf("QQQ defined SAME_KEY QQQ");
+	Rprintf("QQQ defined SAME_KEY QQQ\n");
 	iv = fromHex("F4994F9B2DCD5E0E84BC6386D4523D2C");
 #endif
 	const std::string pwHash = hashPassword(encryptedKey.hashName, iv, pass, spinCount);

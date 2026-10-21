@@ -44,7 +44,7 @@ int msoc_enc(const char *data, const uint32_t dataSize, const std::string outFil
     return MSOC_ERR_EXCEPTION;
   }
 
-extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP sexp_pass, SEXP sexp_aes256)
+static int msocRun(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP sexp_pass, SEXP sexp_aes256)
 {
 
   // inputs
@@ -82,9 +82,6 @@ extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP
   if (mode.compare("enc") == 0 && err == MSOC_NOERR && format == ms::fCfb) {
     err = MSOC_ERR_ALREADY_ENCRYPTED;
   }
-  if (err != MSOC_NOERR) {
-    Rf_error("%s\n", MSOC_getErrMessage(err));
-  }
 
   // if (debug) {
   //   Rprintf("inFile = %s , outFile = %s\n", inFile.c_str(), outFile.c_str());
@@ -92,6 +89,8 @@ extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP
   //   Rprintf("dataSize: %d\n", dataSize);
   //   Rprintf("passData = %s - %s\n", pass.c_str(), passData.c_str());
   // }
+
+  if (err != MSOC_NOERR) return err;
 
   if (mode.compare("enc") == 0) {
 
@@ -102,9 +101,14 @@ extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP
 
     err = msoc_dec(data.data(), dataSize, outFile, passData, secretKey, doView);
   }
+  return err;
+}
+
+extern "C" SEXP R_msoc(SEXP sexp_mode, SEXP sexp_inFile, SEXP sexp_outFile, SEXP sexp_pass, SEXP sexp_aes256)
+{
+  const int err = msocRun(sexp_mode, sexp_inFile, sexp_outFile, sexp_pass, sexp_aes256);
   if (err != MSOC_NOERR) {
     Rf_error("%s\n", MSOC_getErrMessage(err));
-    return Rf_ScalarInteger(-1); // will not be returned, due to error
   }
   return Rf_ScalarInteger(0);
 }
