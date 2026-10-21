@@ -310,7 +310,7 @@ struct EncryptionInfo {
 
 		p += encryptionHeaderSize;
 		dataSize -= encryptionHeaderSize;
-		Rprintf("dataSize=%u\n", (uint32_t)dataSize);
+		dprintf("dataSize=%u\n", (uint32_t)dataSize);
 		seVerifier.analyze(p, dataSize);
 	}
 

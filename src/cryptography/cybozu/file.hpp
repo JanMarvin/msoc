@@ -12,6 +12,7 @@
 #include <cybozu/exception.hpp>
 #include <vector>
 #include <ios>
+#include <R.h>
 #ifdef _WIN32
 	#include <shlwapi.h>
 	#include <io.h>
